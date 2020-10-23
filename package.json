@@ -12,7 +12,8 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-virtualized": "^9.22.2",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "whatwg-fetch": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
