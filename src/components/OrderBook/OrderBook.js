@@ -46,7 +46,7 @@ const headerRenderer = ({ label, className }) => (<TableHeaderCell className={cl
 const OrderBook = ({ rows }) => {
 
     return (
-        <>
+        <div data-testid="order-book-container">
             <HeadersContainer>
                 <Header>Buys</Header>
                 <Header>Sells</Header>
@@ -74,7 +74,7 @@ const OrderBook = ({ rows }) => {
                         width={200}
                 />
             </VirtualizedTable>
-        </>
+        </div>
     );
 };
 
