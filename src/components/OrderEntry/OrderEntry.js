@@ -62,7 +62,7 @@ const OrderEntry = ({ loading, onSubmit }) => {
 
     return (
         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmitForm)}>
-            <Container>
+            <Container data-testid="order-entry-container">
                 <FormGroup>
                     <ButtonToggle onChange={setType} value={type} />
                 </FormGroup>

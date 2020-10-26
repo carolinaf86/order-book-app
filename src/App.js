@@ -65,7 +65,7 @@ const App = () => {
         <ThemeProvider theme={Theme}>
             <div className="App">
                 <GlobalStyle/>
-                {error && <ErrorBanner>Oops! Something went wrong. Please try again later.</ErrorBanner>}
+                {error && <ErrorBanner data-testid="error-banner">Oops! Something went wrong. Please try again later.</ErrorBanner>}
                 <Container>
                     <OrderEntry loading={orderEntryLoading} onSubmit={handleSubmit} />
                     {orders && <OrderBook orders={orders} loading={orderBookLoading} />}
