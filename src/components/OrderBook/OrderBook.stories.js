@@ -10,42 +10,9 @@ const Template = args => <OrderBook {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    rows: [
-        { buyQuantity: 200, buyPrice: 3000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 3000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 3000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 3000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 3000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 1},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 2000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 10},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 1000, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 200},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 1000},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 1000},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 1000},
-        { buyQuantity: 200, buyPrice: 500, sellQuantity: 10, sellPrice: 1000},
-    ]
+    orders: {
+        buys: { 10: 100, 12: 20, 14: 24, 15: 40, 30: 30, 1: 40, 100: 10 },
+        sells: { 15: 0, 20: 1000, 24: 10, 5: 60, 10: 0, 3: 90, 40: 10 }
+    }
+
 };

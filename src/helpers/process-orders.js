@@ -6,12 +6,12 @@ export const processOrders = orders => {
 
     const longestArray = sortedBuys.length >= sortedSells.length ? sortedBuys : sortedSells;
 
-    return longestArray.map((_, idx) => ({
-        buyQuantity: sortedBuys[idx]?.quantity,
-        buyPrice: sortedBuys[idx]?.price,
-        sellQuantity: sortedSells[idx]?.quantity,
-        sellPrice: sortedSells[idx]?.price,
-    }));
+    return longestArray.map((_, idx) => ([
+        sortedBuys[idx]?.quantity,
+        sortedBuys[idx]?.price,
+        sortedSells[idx]?.price,
+        sortedSells[idx]?.quantity
+    ]));
 };
 
 const sortOrders = (ordersObject, compareFn) => {

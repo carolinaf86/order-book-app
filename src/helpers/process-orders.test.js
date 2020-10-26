@@ -9,9 +9,9 @@ describe('processOrders', () => {
         const rows = processOrders(orders);
         expect(rows).not.toBeNull();
         expect(rows).toHaveLength(3);
-        expect(rows[0]).toEqual({ buyPrice: 14, buyQuantity: 24, sellPrice: 15, sellQuantity: 1 });
-        expect(rows[1]).toEqual({ buyPrice: 12, buyQuantity: 20, sellPrice: 20, sellQuantity: 1000 });
-        expect(rows[2]).toEqual({ buyPrice: 10, buyQuantity: 100, sellPrice: 24, sellQuantity: 10 });
+        expect(rows[0]).toEqual([ 24, 14, 15, 1 ]);
+        expect(rows[1]).toEqual([ 20, 12, 20, 1000 ]);
+        expect(rows[2]).toEqual([ 100, 10, 24, 10 ]);
     });
     it('removes orders with 0 quantity', () => {
         const orders = {
@@ -21,9 +21,9 @@ describe('processOrders', () => {
         const rows = processOrders(orders);
         expect(rows).not.toBeNull();
         expect(rows).toHaveLength(3);
-        expect(rows[0]).toEqual({ buyPrice: 14, buyQuantity: 24, sellPrice: 20, sellQuantity: 1000 });
-        expect(rows[1]).toEqual({ buyPrice: 12, buyQuantity: 20, sellPrice: 24, sellQuantity: 10 });
-        expect(rows[2]).toEqual({ buyPrice: 10, buyQuantity: 100 });
+        expect(rows[0]).toEqual([ 24, 14, 20, 1000 ]);
+        expect(rows[1]).toEqual([ 20, 12, 24, 10 ]);
+        expect(rows[2]).toEqual([ 100, 10, undefined, undefined ]);
     });
     it('returns an empty array if orders object is empty', () => {
         const orders = {};
@@ -37,9 +37,9 @@ describe('processOrders', () => {
             expect(rows).not.toBeNull();
             expect(rows).toHaveLength(1);
             if (idx === 0) {
-                expect(rows[0]).toEqual({ buyPrice: 1, buyQuantity: 20 });
+                expect(rows[0]).toEqual([ 20, 1, undefined, undefined ]);
             } else {
-                expect(rows[0]).toEqual({ sellPrice: 1, sellQuantity: 20 });
+                expect(rows[0]).toEqual([ undefined, undefined, 1, 20 ]);
             }
         });
 
