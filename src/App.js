@@ -5,6 +5,14 @@ import { ThemeProvider } from 'styled-components';
 import { Theme } from './Theme';
 import OrderBook from './components/OrderBook/OrderBook';
 import { callFetch } from './helpers/call-fetch';
+import OrderEntry from './components/OrderEntry/OrderEntry';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    width: 800px;
+    height: 100vh;
+    margin: auto;
+`;
 
 const App = () => {
     const [orders, setOrders] = useState({ buys: {}, sells: {} });
@@ -26,11 +34,19 @@ const App = () => {
 
     }, []);
 
+    const handleSubmit = (type, data) => {
+        // TODO make POST request, reload data
+        console.log('Type', type, 'data', data);
+    }
+
     return (
         <ThemeProvider theme={Theme}>
             <div className="App">
                 <GlobalStyle/>
-                {orders && <OrderBook orders={orders} loading={loading} />}
+                <Container>
+                    <OrderEntry onSubmit={handleSubmit} />
+                    {orders && <OrderBook orders={orders} loading={loading} />}
+                </Container>
             </div>
         </ThemeProvider>
     );
