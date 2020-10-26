@@ -71,7 +71,7 @@ const OrderEntry = ({ onSubmit }) => {
                     </Feedback>
                 </FormGroup>
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" data-testid="order-entry-submit-btn">Submit</Button>
             </Container>
         </form>
     )
