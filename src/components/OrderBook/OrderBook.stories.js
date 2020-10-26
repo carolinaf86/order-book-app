@@ -16,3 +16,9 @@ Default.args = {
     }
 
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+    orders: {},
+    loading: true
+}

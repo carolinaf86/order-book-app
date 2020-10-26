@@ -30,7 +30,7 @@ const App = () => {
         <ThemeProvider theme={Theme}>
             <div className="App">
                 <GlobalStyle/>
-                {orders && <OrderBook orders={orders} />}
+                {orders && <OrderBook orders={orders} loading={loading} />}
             </div>
         </ThemeProvider>
     );

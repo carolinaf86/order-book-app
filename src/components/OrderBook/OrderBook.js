@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { processOrders } from '../../helpers/process-orders';
 import { FixedSizeGrid as Grid } from 'react-window';
+import { Dot } from 'react-animated-dots';
 
 const Container = styled.div`
     & .grid-container {
@@ -60,7 +61,15 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => (
     </TableCell>
 );
 
-const OrderBook = ({ orders }) => {
+const CellPlaceholder = ({ columnIndex, style }) => (
+    <TableCell className={columnIndex === 1 ? 'border-right' : ''} style={style}>
+        <Dot>.</Dot>
+        <Dot>.</Dot>
+        <Dot>.</Dot>
+    </TableCell>
+);
+
+const OrderBook = ({ orders, loading }) => {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -89,7 +98,7 @@ const OrderBook = ({ orders }) => {
             </HeadersContainer>
             <Grid columnCount={4} columnWidth={columnWidth} height={gridHeight} width={gridWidth} rowCount={numRows} rowHeight={rowHeight} itemData={rows}
             className="grid-container">
-                {Cell}
+                {loading ? CellPlaceholder : Cell}
             </Grid>
         </Container>
     );
