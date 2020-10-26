@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const HeadersContainer = styled.div`
-    width: ${({ width}) => width || '800px'};
+    width: ${({ width }) => width || '800px'};
     height: 80px;
     display: flex;
     border-top: 1px solid ${({ theme }) => theme.colors.lightGrey};
@@ -25,7 +25,7 @@ const Header = styled.div`
     flex-wrap: wrap;
     font-weight: 700;
     &.left-header {
-        width: ${({ width}) => width};
+        width: ${({ width }) => width};
         border-right: 1px solid ${({ theme }) => theme.colors.lightGrey};
     }
     &.right-header {
@@ -53,13 +53,32 @@ const TableCell = styled.div`
     &.border-right {
         border-right: 1px solid ${({ theme }) => theme.colors.lightGrey};
     }
+    &.buy {
+        color: ${({ theme }) => theme.colors.darkGreen};
+    }
+    &.sell {
+        color: ${({ theme }) => theme.colors.darkRed};
+    }
 `;
 
-const Cell = ({ columnIndex, rowIndex, style, data }) => (
-    <TableCell className={columnIndex === 1 ? 'border-right' : ''} style={style}>
-        {data[rowIndex]?.[columnIndex]}
-    </TableCell>
-);
+const Cell = ({ columnIndex, rowIndex, style, data }) => {
+    let className;
+    switch (columnIndex) {
+        case 1:
+            className = 'border-right buy';
+            break;
+        case 2:
+            className = 'sell';
+            break;
+        default:
+            className = '';
+    }
+    return (
+        <TableCell className={className} style={style}>
+            {data[rowIndex]?.[columnIndex]}
+        </TableCell>
+    );
+}
 
 const CellPlaceholder = ({ columnIndex, style }) => (
     <TableCell className={columnIndex === 1 ? 'border-right' : ''} style={style}>
@@ -73,7 +92,7 @@ const OrderBook = ({ orders, loading }) => {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
-       setRows(processOrders(orders));
+        setRows(processOrders(orders));
     }, [orders]);
 
     const gridHeight = 600;
@@ -96,8 +115,9 @@ const OrderBook = ({ orders, loading }) => {
                     <HeaderSubtitle>Quantity</HeaderSubtitle>
                 </Header>
             </HeadersContainer>
-            <Grid columnCount={4} columnWidth={columnWidth} height={gridHeight} width={gridWidth} rowCount={numRows} rowHeight={rowHeight} itemData={rows}
-            className="grid-container">
+            <Grid columnCount={4} columnWidth={columnWidth} height={gridHeight} width={gridWidth} rowCount={numRows} rowHeight={rowHeight}
+                  itemData={rows}
+                  className="grid-container">
                 {loading ? CellPlaceholder : Cell}
             </Grid>
         </Container>
@@ -105,7 +125,12 @@ const OrderBook = ({ orders, loading }) => {
 };
 
 OrderBook.propTypes = {
-    orders: PropTypes.object.isRequired
+    orders: PropTypes.object.isRequired,
+    loading: PropTypes.bool
 };
+
+OrderBook.defaultProps = {
+    loading: false
+}
 
 export default OrderBook;

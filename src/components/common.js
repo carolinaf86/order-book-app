@@ -16,11 +16,7 @@ export const Button = styled.button`
     border-radius: 2px;
     cursor: pointer;
     &:disabled {
-        background-color: ${({ theme }) => theme.colors.lightGrey};
         cursor: not-allowed;
-        &:hover {
-            background-color: ${({ theme }) => theme.colors.lightGrey};
-        }
     }
     &:hover {
         background-color: ${({ theme }) => theme.colors.darkBlue};
