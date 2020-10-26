@@ -1,7 +1,4 @@
-# tzero-fed-take-home
-You will be creating a simple trading front-end. The backend order matching engine is already implemented for you (in `./server.js`) and will be called at `http://localhost:3001`, detailed below.  
-
-This is to be completed without consulting others. You may use reference documentation.  
+# order-book-app
 
 ## Install
 You need `node.js` and `yarn` installed globally  
