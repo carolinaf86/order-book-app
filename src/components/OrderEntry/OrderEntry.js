@@ -15,6 +15,8 @@ const Container = styled.div`
 const FormGroup = styled.div`
     margin-right: 16px;
     & input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
         height: 22px;
         font-size: 16px;
         padding: 4px 6px;
@@ -24,11 +26,11 @@ const FormGroup = styled.div`
         &::placeholder {
             color: ${({ theme }) => theme.colors.mediumGrey};
         }
-        &&&&:focus,:active {
-            outline: none;
-            background-color: transparent;
-            border: 1px solid ${({ theme }) => theme.colors.primaryBlue};
-        }
+    }
+    & input:focus,input:active {
+        outline: none;
+        border: 1px solid ${({ theme }) => theme.colors.primaryBlue};
+        background-color: transparent;
     }
 `;
 
