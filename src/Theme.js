@@ -6,6 +6,9 @@ export const Theme = {
         lightGrey: '#E7E8EA',
         primaryBlue: '#0485CC',
         darkBlue: '#026089',
-        darkRed: '#C7202C'
+        primaryRed: '#FF1F2C',
+        darkRed: '#C7202C',
+        primaryGreen: '#2DD055',
+        darkGreen: '#219452'
     }
 };

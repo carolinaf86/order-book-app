@@ -22,9 +22,5 @@ export const Button = styled.button`
        background-color: ${({ theme }) => theme.colors.darkBlue};
        box-shadow: box-shadow: 0px 1px 3px rgba(31, 50, 77, 0.2);
        outline: none;
-    }  
-    &.selected {
-        background-color: ${({ theme }) => theme.colors.darkBlue};
-        box-shadow: box-shadow: 0px 1px 3px rgba(31, 50, 77, 0.2);
     }
 `;
