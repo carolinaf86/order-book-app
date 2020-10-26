@@ -13,3 +13,9 @@ export const Default = Template.bind({});
 Default.args = {
     onSubmit: action('onSubmit')
 }
+
+export const Loading = Template.bind({});
+Loading.args = {
+    ...Default.args,
+    loading: true
+};

@@ -1,10 +1,10 @@
 import 'whatwg-fetch';
 
-export const callFetch = (url, options) => {
+export const callFetch = (url, options, extractJson = true) => {
     return window.fetch(url, options)
         .then((response) => {
             if (response.ok) {
-                return response.json();
+                return extractJson ? response.json() : response;
             } else {
                 throw new Error(response.status);
             }

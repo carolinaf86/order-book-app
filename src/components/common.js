@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Button = styled.button`
     -webkit-appearance: button;
     height: 32px;
+    width: ${({ width }) => width || 'auto'};
     padding-left: 16px;
     padding-right: 16px;
     background-color: ${({ theme }) => theme.colors.primaryBlue};
@@ -14,6 +15,13 @@ export const Button = styled.button`
     border: none;
     border-radius: 2px;
     cursor: pointer;
+    &:disabled {
+        background-color: ${({ theme }) => theme.colors.lightGrey};
+        cursor: not-allowed;
+        &:hover {
+            background-color: ${({ theme }) => theme.colors.lightGrey};
+        }
+    }
     &:hover {
         background-color: ${({ theme }) => theme.colors.darkBlue};
         color: ${({ theme }) => theme.colors.white};

@@ -14,13 +14,23 @@ const Container = styled.div`
     margin: auto;
 `;
 
+const ErrorBanner = styled.div`
+    flex-direction: row;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.darkRed};
+    box-shadow: 0px 3px 12px #00000033;
+    padding: 8px 13px;
+    align-items: center;
+`;
+
 const App = () => {
     const [orders, setOrders] = useState({ buys: {}, sells: {} });
-    const [loading, setLoading] = useState(false);
+    const [orderBookLoading, setOrderBookLoading] = useState(true);
+    const [orderEntryLoading, setOrderEntryLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [fetchCount, setFetchCount] = useState(0);
 
     useEffect(() => {
-        setLoading(true);
         setError(null);
         callFetch('/book', { method: 'GET', headers: { 'Content-Type': 'application/json' }})
             .then(({ response, error }) => {
@@ -29,23 +39,36 @@ const App = () => {
                 } else {
                     setOrders(response);
                 }
-                setLoading(false);
+                setOrderBookLoading(false);
+                setOrderEntryLoading(false);
             });
 
-    }, []);
+    }, [fetchCount]);
 
     const handleSubmit = (type, data) => {
-        // TODO make POST request, reload data
-        console.log('Type', type, 'data', data);
+        setOrderEntryLoading(true);
+        callFetch(`/${type}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }, false)
+            .then(({ _, error }) => {
+                if (error) {
+                    setError(error);
+                } else {
+                    setFetchCount(fetchCount + 1);
+                }
+            });
     }
 
     return (
         <ThemeProvider theme={Theme}>
             <div className="App">
                 <GlobalStyle/>
+                {error && <ErrorBanner data-testid="error-banner">Oops! Something went wrong. Please try again later.</ErrorBanner>}
                 <Container>
-                    <OrderEntry onSubmit={handleSubmit} />
-                    {orders && <OrderBook orders={orders} loading={loading} />}
+                    <OrderEntry loading={orderEntryLoading} onSubmit={handleSubmit} />
+                    {orders && <OrderBook orders={orders} loading={orderBookLoading} />}
                 </Container>
             </div>
         </ThemeProvider>
