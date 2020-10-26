@@ -105,7 +105,12 @@ const OrderBook = ({ orders, loading }) => {
 };
 
 OrderBook.propTypes = {
-    orders: PropTypes.object.isRequired
+    orders: PropTypes.object.isRequired,
+    loading: PropTypes.bool
 };
+
+OrderBook.defaultProps = {
+    loading: false
+}
 
 export default OrderBook;
