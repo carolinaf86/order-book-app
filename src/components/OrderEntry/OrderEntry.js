@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Button } from '../common';
 import ButtonToggle from '../ButtonToggle/ButtonToggle';
 import PropTypes from 'prop-types';
+import { Dot } from 'react-animated-dots';
 
 const Container = styled.div`
     display: flex;
@@ -42,9 +43,20 @@ const Feedback = styled.div`
     margin-left: 2px;
 `;
 
-const OrderEntry = ({ onSubmit }) => {
-    const { register, handleSubmit, errors } = useForm();
+const LoadingDots = styled.div`
+    font-weight: bold;
+    font-size: 26px;
+`;
+
+const OrderEntry = ({ loading, onSubmit }) => {
+    const { register, handleSubmit, errors, reset } = useForm();
     const [type, setType] = useState('buy');
+
+    useEffect(() => {
+        if (!loading) {
+            reset();
+        }
+    }, [loading]);
 
     const onSubmitForm = value => onSubmit(type, value);
 
@@ -70,15 +82,26 @@ const OrderEntry = ({ onSubmit }) => {
                         {errors.quantity?.type === 'pattern' && <span>Quantity must be a whole number</span>}
                     </Feedback>
                 </FormGroup>
-
-                <Button type="submit" data-testid="order-entry-submit-btn">Submit</Button>
+                { loading && <Button width="82px" disabled>
+                    <LoadingDots>
+                        <Dot>.</Dot>
+                        <Dot>.</Dot>
+                        <Dot>.</Dot>
+                    </LoadingDots>
+                </Button>}
+                { !loading && <Button type="submit" data-testid="order-entry-submit-btn">Submit</Button>}
             </Container>
         </form>
     )
 };
 
 OrderEntry.propTypes = {
+    loading: PropTypes.bool,
     onSubmit: PropTypes.func.isRequired
+};
+
+OrderEntry.defaultProps = {
+    loading: false
 };
 
 export default OrderEntry;

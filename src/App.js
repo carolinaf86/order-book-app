@@ -16,11 +16,12 @@ const Container = styled.div`
 
 const App = () => {
     const [orders, setOrders] = useState({ buys: {}, sells: {} });
-    const [loading, setLoading] = useState(false);
+    const [orderBookLoading, setOrderBookLoading] = useState(false);
+    const [orderEntryLoading, setOrderEntryLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
+        setOrderBookLoading(true);
         setError(null);
         callFetch('/book', { method: 'GET', headers: { 'Content-Type': 'application/json' }})
             .then(({ response, error }) => {
@@ -29,14 +30,26 @@ const App = () => {
                 } else {
                     setOrders(response);
                 }
-                setLoading(false);
+                setOrderBookLoading(false);
             });
 
     }, []);
 
     const handleSubmit = (type, data) => {
-        // TODO make POST request, reload data
-        console.log('Type', type, 'data', data);
+        setOrderEntryLoading(true);
+        callFetch(`/${type}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(({ _, error }) => {
+                if (error) {
+                    setError(error);
+                } else {
+                    // TODO load data
+                }
+                setOrderEntryLoading(false);
+            });
     }
 
     return (
@@ -44,8 +57,8 @@ const App = () => {
             <div className="App">
                 <GlobalStyle/>
                 <Container>
-                    <OrderEntry onSubmit={handleSubmit} />
-                    {orders && <OrderBook orders={orders} loading={loading} />}
+                    <OrderEntry loading={orderEntryLoading} onSubmit={handleSubmit} />
+                    {orders && <OrderBook orders={orders} loading={orderBookLoading} />}
                 </Container>
             </div>
         </ThemeProvider>
