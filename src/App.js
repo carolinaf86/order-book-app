@@ -32,33 +32,33 @@ const App = () => {
 
     useEffect(() => {
         setError(null);
-        callFetch('/book', { method: 'GET', headers: { 'Content-Type': 'application/json' }})
-            .then(({ response, error }) => {
-                if (error) {
-                    setError(error);
-                } else {
-                    setOrders(response);
-                }
-                setOrderBookLoading(false);
-                setOrderEntryLoading(false);
-            });
+        const fetchOrders = async () => {
+            const { response, error } = await callFetch('/book', { method: 'GET', headers: { 'Content-Type': 'application/json' } });
+            if (error) {
+                setError(error);
+            } else {
+                setOrders(response);
+            }
+            setOrderBookLoading(false);
+            setOrderEntryLoading(false);
+        };
+        fetchOrders();
 
     }, [fetchCount]);
 
-    const handleSubmit = (type, data) => {
+    const handleSubmit = async (type, data) => {
         setOrderEntryLoading(true);
-        callFetch(`/${type}`, {
+        const { error } = await callFetch(`/${type}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
-        }, false)
-            .then(({ _, error }) => {
-                if (error) {
-                    setError(error);
-                } else {
-                    setFetchCount(fetchCount + 1);
-                }
-            });
+        }, false);
+
+        if (error) {
+            setError(error);
+        } else {
+            setFetchCount(fetchCount + 1);
+        }
     }
 
     return (
@@ -67,8 +67,8 @@ const App = () => {
                 <GlobalStyle/>
                 {error && <ErrorBanner data-testid="error-banner">Oops! Something went wrong. Please try again later.</ErrorBanner>}
                 <Container>
-                    <OrderEntry loading={orderEntryLoading} onSubmit={handleSubmit} />
-                    {orders && <OrderBook orders={orders} loading={orderBookLoading} />}
+                    <OrderEntry loading={orderEntryLoading} onSubmit={handleSubmit}/>
+                    {orders && <OrderBook orders={orders} loading={orderBookLoading}/>}
                 </Container>
             </div>
         </ThemeProvider>

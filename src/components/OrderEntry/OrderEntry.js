@@ -58,7 +58,7 @@ const OrderEntry = ({ loading, onSubmit }) => {
         if (!loading) {
             reset();
         }
-    }, [loading]);
+    }, [loading, reset]);
 
     const onSubmitForm = value => onSubmit(type, value);
 
