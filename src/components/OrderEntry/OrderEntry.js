@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '../common';
 import ButtonToggle from '../ButtonToggle/ButtonToggle';
 import PropTypes from 'prop-types';
-import { Dot } from 'react-animated-dots';
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 const Container = styled.div`
     display: flex;
@@ -45,9 +45,12 @@ const Feedback = styled.div`
     margin-left: 2px;
 `;
 
-const LoadingDots = styled.div`
+const LoadingDotsContainer = styled.div`
     font-weight: bold;
     font-size: 26px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
 `;
 
 const OrderEntry = ({ loading, onSubmit }) => {
@@ -66,7 +69,7 @@ const OrderEntry = ({ loading, onSubmit }) => {
         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmitForm)}>
             <Container data-testid="order-entry-container">
                 <FormGroup>
-                    <ButtonToggle onChange={setType} value={type} />
+                    <ButtonToggle onChange={setType} value={type}/>
                 </FormGroup>
                 <FormGroup>
                     <input name="price" type="number" step="0.01" placeholder="Price"
@@ -84,14 +87,12 @@ const OrderEntry = ({ loading, onSubmit }) => {
                         {errors.quantity?.type === 'pattern' && <span>Quantity must be a whole number</span>}
                     </Feedback>
                 </FormGroup>
-                { loading && <Button width="82px" disabled>
-                    <LoadingDots>
-                        <Dot>.</Dot>
-                        <Dot>.</Dot>
-                        <Dot>.</Dot>
-                    </LoadingDots>
+                {loading && <Button width="82px" disabled>
+                    <LoadingDotsContainer>
+                        <LoadingDots />
+                    </LoadingDotsContainer>
                 </Button>}
-                { !loading && <Button type="submit" data-testid="order-entry-submit-btn">Submit</Button>}
+                {!loading && <Button type="submit" data-testid="order-entry-submit-btn">Submit</Button>}
             </Container>
         </form>
     )
