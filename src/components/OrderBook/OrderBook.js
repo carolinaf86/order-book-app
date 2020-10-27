@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { processOrders } from '../../helpers/process-orders';
 import { FixedSizeGrid as Grid } from 'react-window';
-import { Dot } from 'react-animated-dots';
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 const Container = styled.div`
     & .grid-container {
@@ -82,9 +82,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
 
 const CellPlaceholder = ({ columnIndex, style }) => (
     <TableCell className={columnIndex === 1 ? 'border-right' : ''} style={style}>
-        <Dot>.</Dot>
-        <Dot>.</Dot>
-        <Dot>.</Dot>
+        <LoadingDots />
     </TableCell>
 );
 
