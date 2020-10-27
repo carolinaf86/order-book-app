@@ -1,24 +1,28 @@
 import 'whatwg-fetch';
 
-export const callFetch = (url, options, extractJson = true) => {
-    return window.fetch(url, options)
-        .then((response) => {
-            if (response.ok) {
-                return extractJson ? response.json() : response;
-            } else {
-                throw new Error(response.status);
+export const callFetch = async (url, options, extractJson = true) => {
+    try {
+        let response = await window.fetch(url, options);
+
+        if (response.ok) {
+
+            if (extractJson) {
+                response = await response.json()
             }
-        })
-        .then((response) => {
-            return {
-                error: false,
-                response,
-            };
-        })
-        .catch((err) => {
-            return {
-                error: err.toString(),
-                response: null,
-            };
-        });
+
+        } else {
+            throw new Error(response.status?.toString());
+        }
+
+        return {
+            error: false,
+            response
+        };
+
+    } catch (error) {
+        return {
+            error: error.toString(),
+            response: null,
+        };
+    }
 };
